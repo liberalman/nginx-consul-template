@@ -6,7 +6,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     apt-get -y install curl runit && \
     rm -rf /var/lib/apt/lists/*
 
-ENV CT_URL https://github.com/hashicorp/consul-template/releases/download/v0.10.0/consul-template_0.10.0_linux_amd64.tar.gz
+ENV CT_URL https://github.com/hashicorp/consul-template/archive/v0.19.0.tar.gz
 RUN curl -L $CT_URL | tar -C /usr/local/bin --strip-components 1 -zxf -
 
 ADD nginx.service /etc/service/nginx/run
