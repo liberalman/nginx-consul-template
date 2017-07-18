@@ -3,7 +3,7 @@ FROM alpine:latest
 MAINTAINER liberalman liberalman@github.com
 
 # install nginx
-RUN apk --update --no-cache add nginx curl bash
+RUN apk --update --no-cache add nginx curl
 
 ENV CT_URL https://releases.hashicorp.com/consul-template/0.19.0/consul-template_0.19.0_linux_amd64.tgz
 RUN curl -L $CT_URL | tar -C /usr/local/bin --strip-components 1 -zxf -
