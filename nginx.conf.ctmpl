@@ -4,11 +4,24 @@ upstream app {
   {{else}}server 127.0.0.1:65535; # force a 502{{end}}
 }
 
+upstream jenkins {
+  {{range service "jenkins"}}
+  server {{.Address}}:14337 max_fails=3 fail_timeout=60 weight=1;
+  {{end}}
+}
+
 server {
   listen 80 default_server;
 
   location / {
     proxy_pass http://app;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+  }
+
+  location ^~ /jenkins {
+    proxy_pass http://jenkins;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;

@@ -2,5 +2,5 @@
 
 exec consul-template \
      -consul-addr=consul:8500 \
-     -template "/etc/consul-templates/nginx.conf:/etc/nginx/conf.d/app.conf:nginx -s reload"
+     -template "/etc/consul-templates/nginx.conf.ctmpl:/etc/nginx/conf.d/app.conf:nginx -s reload"
 
